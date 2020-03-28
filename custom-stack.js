@@ -1,28 +1,33 @@
 // Написать реализацию стека с методами getMin, push, top и получение элемента за константное время
-function CustomStack() {
-    const _store = [];
-    let _minValue = null;
+class CustomStack {
+  constructor() {
+    this.store = [];
+    this.minValue = null;
+  }
 
-    return {
-        findById(id) {
-            return _store[id];
-        },
-        top() {
-            return _store[_store.length - 1];
-        },
-        push(element) {
-            if (_store.length === 0 || element < _minValue) {
-                _minValue = element;
-            }
-            _store.push(element);
-        },
-        getMin() {
-            return _minValue;
-        },
-        dump() {
-            return _store;
-        }
+  findById(id) {
+    return this.store[id];
+  }
+
+  top() {
+    return this.store[this.store.length - 1];
+  }
+
+  push(element) {
+    if (this.store.length === 0 || element < this.minValue) {
+      this.minValue = element;
     }
+    
+    this.store.push(element);
+  }
+
+  getMin() {
+    return this.minValue;
+  }
+
+  dump() {
+    return this.store;
+  }
 }
 
 const cs = new CustomStack();
