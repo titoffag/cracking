@@ -10,17 +10,21 @@ function curry(fn) {
   };
 }
 
-function abc(a, b, c) {
+function functionWithThreeParams(a, b, c) {
   return a + b + c;
 }
 
-function abcdef(a, b, c, d, e, f) {
+function functionWithFiveParams(a, b, c, d, e, f) {
   return a + b + c + d + e + f;
 }
 
-console.log(curry(abc)("A")("B")("C")); // 'ABC'
-console.log(curry(abc)("A", "B")("C")); // 'ABC'
-console.log(curry(abc)("A", "B", "C")); // 'ABC'
+console.log(curry(functionWithThreeParams)("A")("B")("C") === "ABC");
+console.log(curry(functionWithThreeParams)("A", "B")("C") === "ABC");
+console.log(curry(functionWithThreeParams)("A", "B", "C") === "ABC");
 
-console.log(curry(abcdef)("A")("B")("C")("D")("E")("F")); // 'ABCDEF'
-console.log(curry(abcdef)("A", "B", "C")("D", "E", "F")); // 'ABCDEF'
+console.log(
+  curry(functionWithFiveParams)("A")("B")("C")("D")("E")("F") === "ABCDEF"
+);
+console.log(
+  curry(functionWithFiveParams)("A", "B", "C")("D", "E", "F") === "ABCDEF"
+);
