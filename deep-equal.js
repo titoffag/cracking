@@ -1,44 +1,35 @@
-function isNullOrUndefined(reference) {
-  return reference == null;
+// Реализовать метод deepEqual для объектов без JSON.Stringify 
+let obj1 = {
+  a: 1,
+  b: {
+    c: 2
+  }
+}
+let obj2 = {
+  a: 1,
+  b: {
+    c: 2
+  }
 }
 
-function isNotObject(variable) {
-  return typeof variable !== "object";
-}
-
-function deepEqual(firstObject, secondObject) {
-  if (firstObject === secondObject) {
-    return true;
+function deepEqual(obj1, obj2){
+  function isObject(obj) {
+  	return typeof obj === "object" && obj != null;
   }
 
-  if (
-    isNullOrUndefined(firstObject) ||
-    isNullOrUndefined(secondObject) ||
-    isNotObject(firstObject) ||
-    isNotObject(secondObject)
-  ) {
+	if (obj1 === obj2) {
+  	return true;
+  } else if (isObject(obj1) && isObject(obj2)) {
+  	if (Object.keys(obj1).length !== Object.keys(obj2).length) {
     return false;
-  }
-
-  let propertiesCounterOfFirstObject,
-    propertiesCounterOfSecondObject = 0;
-
-  for (let property in firstObject) {
-    propertiesCounterOfFirstObject++;
-  }
-
-  for (let propertyOfSecondObject in secondObject) {
-    propertiesCounterOfSecondObject++;
-    if (
-      !(propertyOfSecondObject in firstObject) ||
-      !deepEqual(
-        firstObject[propertyOfSecondObject],
-        secondObject[propertyOfSecondObject]
-      )
-    ) {
-      return false;
     }
-
-    return propertiesCounterOfFirstObject === propertiesCounterOfSecondObject;
+    for (let prop in obj1) {
+    	if (!deepEqual(obj1[prop], obj2[prop])) {
+      	return false;
+      }
+    }
+  	return true;
   }
 }
+
+console.log( deepEqual(obj1, obj2) ); //true
